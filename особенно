@@ -1,0 +1,30 @@
+print('задание 1')
+from tkinter import *
+from tkinter import ttk
+root = Tk()
+root.title("КЛАВИАТУРА ТИПО")
+root.geometry("500x500+700+100")
+root.configure(background='pink')
+Label = ttk.Label(text='')
+Label.pack()
+def vvod():
+    Label["text"] += '1'
+btn = ttk.Button(text='1',command=vvod)
+btn.place(x=10, y=100)
+def vvod():
+    Label["text"] += '2'
+btn = ttk.Button(text='2',command=vvod)
+btn.place(x=110, y=100)
+def vvod():
+    Label["text"] += '3'
+btn = ttk.Button(text='3',command=vvod)
+btn.place(x=210, y=100)
+def vvod():
+    Label["text"] += '4'
+btn = ttk.Button(text='4',command=vvod)
+btn.place(x=310, y=100)
+def vvod():
+    Label["text"] += '5'
+btn = ttk.Button(text='5',command=vvod)
+btn.place(x=410, y=100)
+root.mainloop()
