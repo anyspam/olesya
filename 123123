@@ -1,0 +1,18 @@
+print('задание 3')
+from tkinter import *
+from tkinter import ttk
+root = Tk()
+root.title("форма регистрации")
+root.geometry("500x500+700+100")
+root.configure(background='pink')
+entry = ttk.Entry()
+entry.pack(anchor=NW, padx=6, pady=6)
+entry = ttk.Entry()
+entry.pack(anchor=NW, padx=6, pady=6)
+entry = ttk.Entry()
+entry.pack(anchor=NW, padx=6, pady=6)
+entry = ttk.Entry()
+entry.pack(anchor=NW, padx=6, pady=6)
+entry = ttk.Entry()
+entry.pack(anchor=NW, padx=6, pady=6)
+root.mainloop()
