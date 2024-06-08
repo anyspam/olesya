@@ -1,0 +1,146 @@
+from cProfile import label
+from tkinter import *
+from tkinter import ttk
+import re
+from tkinter import messagebox
+import math
+from math import cos
+from math import sin
+import tkinter as tk
+
+root = tk.Tk()
+root.title("k")
+root.geometry("290x300+800+300")
+root.configure(background="#696969")
+
+def on_virtual_keyboard(event):
+    return "break"
+context = {
+        '__builtins__': {},
+        'sin': math.sin,
+        'cos': math.cos,
+        'tg': math.tan,
+}
+entr = Entry(root, width=44, background="black", justify="right", fg="orange")
+entr.place(x = 15, y =20)
+
+def on_click(event):
+    if event.widget.cget("text") == "=":
+        try:
+            entr.insert(tk.END, entry.get())
+            result = eval(entry.get(), context)
+            entry.delete(0, tk.END)
+            entry.insert(tk.END, str(result))
+        except:
+            entry.delete(0, tk.END)
+            entry.insert(tk.END, "you are stupid")
+    elif event.widget.cget("text") == "C":
+        entr.delete(0, tk.END)
+        entry.delete(0, tk.END)
+    elif event.widget.cget("text") == "<-":
+        entry.delete(entry.index(END) - 1)
+        count = 0
+    elif event.widget.cget("text") == "sin":
+        entry.insert(END, event.widget.cget("text"))
+        count = 0
+    elif event.widget.cget("text") == "cos":
+        entry.insert(END, event.widget.cget("text"))
+        count = 0
+    elif event.widget.cget("text") == "tg":
+        entry.insert(END, event.widget.cget("text"))
+        count = 0
+    else:
+        entry.insert(tk.END, event.widget.cget("text"))
+
+
+entry = tk.Entry(root, width=44, background="black", justify="right", fg = "white")
+entry.grid(row=0, column=0, columnspan=4, padx=15, pady=35)
+
+buttons1 = ['1', '2', '3', '4', '5','6','7','8','9']
+buttons2 = ['C', '*', '/', '<-', '+', '-']
+buttons3 = ['sin', 'cos', 'tg', '(', ')']
+x1 = 70
+y1 = 110
+count = 0
+for i in buttons1:
+    btn = Button(text = i, background='#000000', fg="white", width=5, height=2)
+    btn.place(x=x1, y=y1)
+    x1 += 55
+    if x1 > 180:
+        y1 += 45
+        x1 = 70
+    btn.bind("<Button-1>", on_click)
+x1 = 70
+y1 = 65
+for i in buttons2:
+    btn2 = Button(text = i, background='#D2691E', fg="black", width=5, height=2)
+    btn2.place(x=x1, y=y1)
+    x1 += 55
+    if x1 > 235:
+        y1 += 45
+        x1 = 235
+    btn2.bind("<Button-1>", on_click)
+x1 = 15
+y1 = 65
+for i in buttons3:
+    btn6 = Button(text = i, background='black', fg="#D2691E", width=5, height=2)
+    btn6.place(x=x1, y=y1)
+    y1 += 45
+    if x1 > 180:
+        x1 = 0
+    btn6.bind("<Button-1>", on_click)
+
+btn3 = Button(text = '=', background='#D2691E', fg="black", width=5, height=5)
+btn3.place(x=235, y=200)
+
+btn3.bind("<Button-1>", on_click)
+btn4 = Button(text = '0', background='#000000', fg="#D2691E", width=13, height=2)
+
+btn4.place(x=70, y=245)
+btn4.bind("<Button-1>", on_click)
+
+btn5 = Button(text = '.', background='#000000', fg="#D2691E", width=5, height=2)
+btn5.place(x=180, y=245)
+btn5.bind("<Button-1>", on_click)
+
+root.bind("<Key>", on_virtual_keyboard)  
+entry.bind("<Key>", on_virtual_keyboard)
+entr.bind("<Key>", on_virtual_keyboard)
+
+his = []
+def histor_copy():
+    his.append(entry.get())
+    print(his)
+def clickbtnq(wqe):
+    if wqe in his:
+        entry.insert(END, wqe)
+        print(wqe)
+    else:
+        print("eblo", wqe)
+def histor_past():
+    yy=Tk()
+    yy.title('yy')
+    yy.resizable(False, False)
+    ent = ttk.Entry(yy)
+    ent.pack()
+    for i in his:
+        lbl=ttk.Label(yy, text=i)
+        lbl.pack()
+        
+        btnq = Button(yy, text="ok", command=lambda x = 'Lambda test': clickbtnq(str(ent.get())))
+        btnq.place(x = 100, y =-5)
+    
+    yy.mainloop()
+def ext():
+    root.destroy()
+main_menu = Menu()
+file_menu = Menu()
+file_menu.add_command(label="Save", command=histor_copy)
+file_menu.add_command(label="Past", command=histor_past)
+file_menu.add_separator()
+
+main_menu.add_cascade(label="History", menu=file_menu)
+main_menu.add_cascade(label="Exit", command=ext)
+root.config(menu=main_menu)
+
+root.mainloop()
