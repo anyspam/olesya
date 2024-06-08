@@ -1,0 +1,67 @@
+
+from tkinter import *
+from tkinter import Tk
+def on_virtual_keyboard(event):
+    return "break"
+root = Tk()
+root.title("clav")
+root.geometry("1020x500+600+100")
+root.configure(bg='#ffe4c4')
+entr = Entry(root, width=165, background="black", fg="orange")
+entr.place(x = 15, y =20)
+y1 = 100
+x1 = 10
+count = 0
+def on_click(event):
+    entr.insert(END, event.widget.cget("text"))
+def cluck(event):
+    global count
+    y1 = 100
+    x1 = 10
+    if event.widget.cget("text") == "^":
+        
+        count += 1
+        print("nach", count)
+        if count >0:
+            for i in alphabet1:
+                btn1 = Button(text = i, background='#000000', fg="white", width=10, height=5)
+                btn1.place(x=x1, y=y1)
+                x1 += 100
+                if x1 > 1009:
+                    x1 = 10
+                    y1 += 100
+                btn1.bind("<Button-1>", on_click)
+                
+        count -=2
+        if count == 0:
+             y1 = 100
+             x1 = 10 
+             for i in alphabet:
+                btn3 = Button(text = i, background='#000000', fg="white", width=10, height=5)
+                btn3.place(x=x1, y=y1)
+                x1 += 100
+                if x1 > 1009:
+                    x1 = 10
+                    y1 += 100
+                btn3.bind("<Button-1>", on_click)
+                
+                
+        print("dlya mal", count)
+    
+alphabet = ['q', 'a', 'w', 'e', 'r','t','y','u','i','o','p','a','s','w','d','f','g','h','j','k','l','z','x','c','v','b','n','m']
+alphabet1 = ['Q', 'A', 'W', 'E', 'R','T','Y','U','I','O','P','A','S','W','D','F','G','H','J','K','J','Z','X','C','V','B','N','M']
+y1 = 100
+x1 = 10
+btn34 = Button(text= '^')
+btn34.place(x = 0, y = 100)
+btn34.bind("<Button-1>", cluck)
+for i in alphabet:
+    btn = Button(text = i, background='#000000', fg="white", width=10, height=5)
+    btn.place(x=x1, y=y1)
+    x1 += 100
+    if x1 > 1009:
+        x1 = 10
+        y1 += 100
+    btn.bind("<Button-1>", on_click)
+entr.bind("<Key>", on_virtual_keyboard)
+root.mainloop()
